@@ -50,8 +50,9 @@ def create_excel_file(how_many_examples=30):
         worksheet.write(row, 1, random_female_surname)
         worksheet.write(row, 2, random_female_name)
         worksheet.write(row, 3, get_random_born_day(2000))
-        worksheet.write(row, 4, "K")
-        worksheet.write(row, 5, random_class)
+        worksheet.write(row, 4, "Wroclaw")
+        worksheet.write(row, 5, "K")
+        worksheet.write(row, 6, random_class)
         row +=1
 
 
@@ -65,8 +66,9 @@ def create_excel_file(how_many_examples=30):
         worksheet.write(row, 1, random_male_surname)
         worksheet.write(row, 2, random_male_name)
         worksheet.write(row, 3, get_random_born_day(2000))
-        worksheet.write(row, 4, "M")
-        worksheet.write(row, 5, random_class)
+        worksheet.write(row, 4, "Wroclaw")
+        worksheet.write(row, 5, "M")
+        worksheet.write(row, 6, random_class)
         row +=1
 
     workbook.close()
@@ -75,10 +77,9 @@ def create_excel_file(how_many_examples=30):
 
 def get_random_born_day(year=2000):
     born_date = radar.random_datetime(
-        start = datetime.datetime(year=year, month=1, day=1),
+        start = datetime.datetime(year=year, month=10, day=10),
         stop = datetime.datetime(year=year, month=12, day=31)
     )
-
     return born_date.strftime('%d/%m/%Y')
 
 
