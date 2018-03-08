@@ -1,4 +1,4 @@
-from BD2018.BD_helper import *
+from BD2018.DataGenerator.BD_helper import *
 
 
 if __name__ == "__main__":
