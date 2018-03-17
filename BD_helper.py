@@ -104,11 +104,72 @@ def create_marks_excel_file():
 
     workbook.close()
 
+def create_teachers_excel_file(teachers_amount=10):
+    with open("Data/male_surnames.txt", 'r', encoding="utf8") as from_file:
+        male_surnames = list(from_file)
+
+    with open("Data/male_names.txt", 'r', encoding="utf8") as from_file:
+        male_names = list(from_file)
+
+    with open("Data/female_surnames.txt", 'r', encoding="utf8") as from_file:
+        female_surnames = list(from_file)
+
+    with open("Data/female_names.txt", 'r', encoding="utf8") as from_file:
+        female_names = list(from_file)
+
+    row = 0
+    workbook = xlsxwriter.Workbook('Nauczyciele.xlsx')
+    worksheet = workbook.add_worksheet()
+
+    for x in range(teachers_amount // 2):
+        random_female_surname, random_female_name, employment_date, born_year, salary, pensum, telephone, bonus = \
+            _get_random_teacher_data(female_surnames, female_names)
+
+        worksheet.write(row, 0, row)
+        worksheet.write(row, 1, random_female_surname)
+        worksheet.write(row, 2, random_female_name)
+        worksheet.write(row, 3, employment_date)
+        worksheet.write(row, 4, _get_random_day(born_year))
+        worksheet.write(row, 5, "K")
+        worksheet.write(row, 6, salary)
+        worksheet.write(row, 7, pensum)
+        worksheet.write(row, 8, telephone)
+        worksheet.write(row, 9, bonus)
+        row += 1
+
+        random_male_surname, random_male_name, employment_date, born_year, salary, pensum, telephone, bonus = \
+            _get_random_teacher_data(female_surnames, female_names)
+
+        worksheet.write(row, 0, row)
+        worksheet.write(row, 1, random_male_surname)
+        worksheet.write(row, 2, random_male_name)
+        worksheet.write(row, 3, employment_date)
+        worksheet.write(row, 4, _get_random_day(born_year))
+        worksheet.write(row, 5, "M")
+        worksheet.write(row, 6, salary)
+        worksheet.write(row, 7, pensum)
+        worksheet.write(row, 8, telephone)
+        worksheet.write(row, 9, bonus)
+        row += 1
+
+    workbook.close()
 
 # <editor-fold desc="Helper methods">
+def _get_random_teacher_data(surnames, names):
+    random_surname = surnames[randint(0, len(surnames) - 1)].strip()
+    random_name = names[randint(0, len(names) - 1)].strip()
+    born_year = randint(1970, 1985)
+    employment_date = _get_random_day(randint(2010, 2017))
+    salary = 3000
+    pensum = 300
+    telephone = "".join([str(randint(1,9)) for x in range(9)])
+    bonus = randint(0,1000)
+
+    return random_surname, random_name, employment_date, born_year, salary, pensum, telephone, bonus
+
 def _get_random_student_data(surnames, names):
     school_classes = (
-    'Ia', "Ib", "Ic", "Id", 'IIa', "IIb", "IIc", "IId", 'IIIa', "IIIb", "IIIc", "IIId", 'IVa', "IVb", "IVc", "IVd")
+    'Ia', "Ic", "Id", 'IIa', "IIb", "IIc", "IId", 'IIIa', "IIIb", "IIIc", "IIId", 'IVa', "IVb", "IVc", "IVd")
     cities = ["Trzebnica", "Wroclaw", "Olawa", "Trestno", "Radwanice", "Siechnice", "Kielczow", "Smolec", "Wilkszyn",
               "Wilczyce", "Czernica", "Kobierzyce", "Wroclaw", "Wroclaw", "Wroclaw"]
     born_years = [2002, 2001, 2000, 1999]
