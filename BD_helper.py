@@ -74,7 +74,7 @@ def create_students_excel_file(how_many_examples=30):
     workbook.close()
 
 
-def create_marks_excel_file():
+def create_grades_excel_file():
     surnames = []
 
     with open("list_of_names.txt", 'r', encoding="utf8") as from_file:
@@ -87,7 +87,7 @@ def create_marks_excel_file():
                 pass
 
     row = 0
-    workbook = xlsxwriter.Workbook('Notes_.xlsx')
+    workbook = xlsxwriter.Workbook('Grades.xlsx')
     worksheet = workbook.add_worksheet()
 
     lesson_types = ["Matematyka", "Fizyka", "Chemia", "Informatyka", "Polski", "Historia", "Geografia", "Angielski",
