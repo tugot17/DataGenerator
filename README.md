@@ -4,4 +4,4 @@
 To run it just run __init__.pyy
 
 ## TODO
-Add some heading to it, in order to use it in pentaho 
+Add some heading to exel file, in order to use it in pentaho 
