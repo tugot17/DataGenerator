@@ -4,6 +4,7 @@ import datetime
 import radar
 import roman
 
+
 def from_male_surnames_create_female_surnames(male_surnames_file="male_surnames.txt"):
     with open(male_surnames_file, 'r') as from_file:
         with open("female_surnames.txt", 'w') as to_file:
@@ -12,6 +13,7 @@ def from_male_surnames_create_female_surnames(male_surnames_file="male_surnames.
                 if line[-1] == "i":
                     line = line[:-1] + "a"
                 to_file.write('{}\n'.format(line))
+
 
 def create_students_excel_file(how_many_examples=30):
     with open("Data/male_surnames.txt", 'r', encoding="utf8") as from_file:
@@ -27,8 +29,18 @@ def create_students_excel_file(how_many_examples=30):
         female_names = list(from_file)
 
     row = 0
-    workbook = xlsxwriter.Workbook('Nazwiska.xlsx')
+    workbook = xlsxwriter.Workbook('Student_surnames.xlsx')
     worksheet = workbook.add_worksheet()
+
+    worksheet.write(row, 0, row)
+    worksheet.write(row, 1, "Surname")
+    worksheet.write(row, 2, "Name")
+    worksheet.write(row, 3, "Born date")
+    worksheet.write(row, 4, "City name")
+    worksheet.write(row, 5, "Gender")
+    worksheet.write(row, 6, "Class number")
+
+    row += 1
 
     for x in range(how_many_examples // 2):
         random_class, random_female_surname, random_female_name, random_city, born_year = _get_random_student_data(
@@ -61,6 +73,7 @@ def create_students_excel_file(how_many_examples=30):
 
     workbook.close()
 
+
 def create_marks_excel_file():
     surnames = []
 
@@ -74,7 +87,7 @@ def create_marks_excel_file():
                 pass
 
     row = 0
-    workbook = xlsxwriter.Workbook('Oceny.xlsx')
+    workbook = xlsxwriter.Workbook('Notes_.xlsx')
     worksheet = workbook.add_worksheet()
 
     lesson_types = ["Matematyka", "Fizyka", "Chemia", "Informatyka", "Polski", "Historia", "Geografia", "Angielski",
@@ -103,6 +116,7 @@ def create_marks_excel_file():
             row += 1
 
     workbook.close()
+
 
 def create_teachers_excel_file(teachers_amount=10):
     with open("Data/male_surnames.txt", 'r', encoding="utf8") as from_file:
@@ -154,6 +168,7 @@ def create_teachers_excel_file(teachers_amount=10):
 
     workbook.close()
 
+
 # <editor-fold desc="Helper methods">
 def _get_random_teacher_data(surnames, names):
     random_surname = surnames[randint(0, len(surnames) - 1)].strip()
@@ -162,14 +177,15 @@ def _get_random_teacher_data(surnames, names):
     employment_date = _get_random_day(randint(2010, 2017))
     salary = 3000
     pensum = 300
-    telephone = "".join([str(randint(1,9)) for x in range(9)])
-    bonus = randint(0,1000)
+    telephone = "".join([str(randint(1, 9)) for x in range(9)])
+    bonus = randint(0, 1000)
 
     return random_surname, random_name, employment_date, born_year, salary, pensum, telephone, bonus
 
+
 def _get_random_student_data(surnames, names):
     school_classes = (
-    'Ia', "Ic", "Id", 'IIa', "IIb", "IIc", "IId", 'IIIa', "IIIb", "IIIc", "IIId", 'IVa', "IVb", "IVc", "IVd")
+        'Ia', "Ic", "Id", 'IIa', "IIb", "IIc", "IId", 'IIIa', "IIIb", "IIIc", "IIId", 'IVa', "IVb", "IVc", "IVd")
     cities = ["Trzebnica", "Wroclaw", "Olawa", "Trestno", "Radwanice", "Siechnice", "Kielczow", "Smolec", "Wilkszyn",
               "Wilczyce", "Czernica", "Kobierzyce", "Wroclaw", "Wroclaw", "Wroclaw"]
     born_years = [2002, 2001, 2000, 1999]
@@ -178,9 +194,10 @@ def _get_random_student_data(surnames, names):
     random_surname = surnames[randint(0, len(surnames) - 1)].strip()
     random_name = names[randint(0, len(names) - 1)].strip()
     random_city = cities[randint(0, len(cities) - 1)]
-    born_year = born_years[roman.fromRoman(random_class[:len(random_class)-1]) - 1]
+    born_year = born_years[roman.fromRoman(random_class[:len(random_class) - 1]) - 1]
 
     return random_class, random_surname, random_name, random_city, born_year
+
 
 def _get_random_day(year=2000):
     born_date = radar.random_datetime(
@@ -188,6 +205,7 @@ def _get_random_day(year=2000):
         stop=datetime.datetime(year=year, month=12, day=31)
     )
     return born_date.strftime('%m/%d/%Y')
+
 
 def _is_date_during_holidays(date: str):
     month = date[:2]
