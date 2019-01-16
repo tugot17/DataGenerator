@@ -13,7 +13,7 @@ This repo alows You to create data necessary for DB course at Wroclaw University
 
 
 ## Getting Started
-To create Your own data just, run __init__.py file. By default it creates student data, to create note or teacher data, just uncomment it in __innit__.py file
+To create Your own data just, run __init__.py file. By default it creates student data, to create note or teacher data, just uncomment it in \__innit__.py file
 
 ### Prerequisites
 ```
