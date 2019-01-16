@@ -5,7 +5,7 @@ This repo alows You to create data necessary for DB course at Wroclaw University
 ### Using Script U can generate:
 ```
 -Student data 
--Students marks
+-Students grades
 -Teacher data
 ```
 
