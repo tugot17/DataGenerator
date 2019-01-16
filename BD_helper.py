@@ -93,7 +93,7 @@ def create_grades_excel_file():
     lesson_types = ["Matematyka", "Fizyka", "Chemia", "Informatyka", "Polski", "Historia", "Geografia", "Angielski",
                     "Niemiecki", "Matematyka"]
 
-    marks = [2, 3, 3.5, 4, 4.5, 5]
+    grades = [2, 3, 3.5, 4, 4.5, 5]
 
     for surname in surnames:
         random_marks_amount = randint(0, 10)
@@ -107,7 +107,7 @@ def create_grades_excel_file():
                 continue
 
             random_lesson_type = lesson_types[randint(0, len(lesson_types) - 1)]
-            random_mark = marks[randint(0, len(marks) - 1)]
+            random_mark = grades[randint(0, len(grades) - 1)]
 
             worksheet.write(row, 0, surname)
             worksheet.write(row, 1, random_lesson_type)
